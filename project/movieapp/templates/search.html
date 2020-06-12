@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container mt-5">
+      <h2 class="mb-3">Movies found: {{ count }}</h2>
+        <div class="row ">
+            <div class="col-lg-12 d-flex justify-content-around flex-wrap">
+                {% for pelicula in peliculas %}
+                <div class="card mr-5 mb-5" style="width: 18rem;">
+                    <img src="{{pelicula.poster}}" class="card-img-top" alt="poster">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ pelicula.title }}</h5>
+                      <div class="d-flex justify-content-between">
+                        <h6 class="card-title"><i class="fa fa-calendar"></i> {{ pelicula.year }}</h6>
+                        <a href="{% url 'movie_detail' title=pelicula.title %}" class="btn btn-sm btn-primary "><i class="fa fa-eye"></i></a>
+                      </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

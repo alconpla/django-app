@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="jumbotron">
+      <div class="container">
+        <h1 class="display-4">Hello, world!</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="container mt-5">
+      <h2 class="mb-3">Marvel films</h2>
+        <div class="row ">
+            <div class="col-lg-12 d-flex justify-content-around flex-wrap">
+                {% for pelicula in peliculas %}
+                <div class="card mr-5 mb-5" style="width: 18rem;">
+                    <img src="{{pelicula.poster}}" class="card-img-top" alt="poster">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ pelicula.title }}</h5>
+                      <div class="d-flex justify-content-between">
+                        <h6 class="card-title"><i class="fa fa-eye"></i> {{ pelicula.year }}</h6>
+                        <a href="{% url 'movie_detail' title=pelicula.title %}" class="btn btn-sm btn-primary "><i class="fa fa-eye"></i></a>
+                      </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <h2 class="mb-3">Lord of the Rings films</h2>
+        <div class="row ">
+            <div class="col-lg-12 d-flex justify-content-around flex-wrap">
+                {% for pelicula in peliculas2 %}
+                <div class="card mr-5 mb-5" style="width: 18rem;">
+                    <img src="{{pelicula.poster}}" class="card-img-top" alt="poster">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ pelicula.title }}</h5>
+                      <div class="d-flex justify-content-between">
+                        <h6 class="card-title"><i class="fa fa-calendar"></i> {{ pelicula.year }}</h6>
+                        <a href="{% url 'movie_detail' title=pelicula.title %}" class="btn btn-sm btn-primary "><i class="fa fa-eye"></i></a>
+                      </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <h2 class="mb-3">John Wick films</h2>
+        <div class="row">
+            <div class="col-lg-12 d-flex justify-content-around flex-wrap">
+                {% for pelicula in peliculas3 %}
+                <div class="card mr-5 mb-5" style="width: 18rem;">
+                    <img src="{{pelicula.poster}}" class="card-img-top" alt="poster">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ pelicula.title }}</h5>
+                      <div class="d-flex justify-content-between">
+                        <h6 class="card-title"><i class="fa fa-calendar"></i> {{ pelicula.year }}</h6>
+                        <a href="{% url 'movie_detail' title=pelicula.title %}" class="btn btn-sm btn-primary "><i class="fa fa-eye"></i></a>
+                      </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
