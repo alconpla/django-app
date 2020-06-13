@@ -1,0 +1,77 @@
+.wallpaper{
+    background-image: url(../img/ff1.jpg);
+    background-position: top center;
+    background-size: cover;
+    height: 60vh;
+    color: #fff;
+    text-align: center;
+}
+
+.jumbotron {
+    background: -webkit-radial-gradient(50% 25%, ellipse cover, rgba(25,92,116,0.85), rgba(41,28,66,0.85) 100%);
+    height: 60vh;
+    width: 100%;
+    position: relative;
+}
+
+.w-text{
+    padding-top: 6em;
+}
+.w-text h1{
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.w-text .btn{
+    background-color: transparent;
+    border: 2px solid #9ED5FF;
+    color: #9ED5FF;
+    box-shadow: none !important;
+    font-weight: bold;
+}
+
+.w-text .btn:hover{
+    background-color: transparent;
+    border-color: #fff;
+    color: #fff;
+}
+
+.navbar{
+    border-radius: 0;
+}
+
+.bg{
+    background-color: #131922;
+}
+
+.textblocks{
+    margin: 0 auto;
+    padding: 80px 0 80px;
+    width: 100%;
+    max-width: 1160px;
+    overflow: hidden;
+    color: #fff;
+    height: 340px;
+}
+
+.blocks{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 30px;
+}
+.blocks h3{
+    font-size: 22px;
+    font-weight: 400;
+
+}
+
+.blocks p{
+    font-size: 18px;
+    color: #ACB4BF;
+}
+
+.block{
+    width: 32%;
+    margin-right: 50px;
+}

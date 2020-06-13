@@ -61,7 +61,61 @@ def movie_detail(request, title):
     actors = json_data['Actors']
     plot = json_data['Plot']
     poster = json_data['Poster']
-    # ratings
+    awards = json_data['Awards']
+    try: 
+        rating = json_data['imdbRating']
+        # rating = ratings[1]['Value']
+    except:
+        rating = 'No rating'
 
-    context = {'title': title, 'rated': rated, 'released': released, 'runtime': runtime, 'genre': genre, 'director': director, 'actors': actors, 'plot': plot, 'poster': poster, }
+    context = {'title': title, 'rated': rated, 'released': released, 'runtime': runtime, 'genre': genre, 'director': director, 'actors': actors, 'plot': plot, 'poster': poster, 'rating': rating, 'awards': awards}
     return render(request, 'moviedetail.html', context)
+
+# def custom_login(request):
+#     username = request.POST.get('username')
+#     password = request.POST.get('password')
+    
+#     user = authenticate(request, username=username, password=password)
+
+#     if user is not None:
+#         login(request, user)
+        
+#     return HttpResponseRedirect(reverse('home:home'))
+
+# def custom_logout(request):
+#     if request.user.is_authenticated:
+#         logout(request)
+
+#     return HttpResponseRedirect(reverse('home:home'))
+
+# def custom_signup(request):
+#     if not request.user.is_authenticated:
+#         if request.method == 'POST':
+#             form = SignupForm(request.POST)
+            
+#             if form.is_valid():
+#                 new_user = form.save()
+#                 display_name = form.cleaned_data.get('display_name')
+#                 bio = form.cleaned_data.get('bio')
+                
+#                 new_user.profile = Profile()
+#                 new_user.profile.display_name = display_name
+#                 new_user.profile.bio = bio
+#                 new_user.profile.save()
+
+#                 username = form.cleaned_data.get('username')
+#                 raw_password = form.cleaned_data.get('password1')
+#                 user = authenticate(username=username, password=raw_password)
+                
+#                 login(request, user)
+#                 return HttpResponseRedirect(reverse("home:home"))
+#         else:
+#             form = SignupForm()
+        
+#         replacements = {
+#             'form': form
+#         }
+
+#         return render(request, 'users/create-account.html', replacements)
+#     else:
+#         return HttpResponseRedirect(reverse('home:home'))
