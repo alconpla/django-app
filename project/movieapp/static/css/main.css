@@ -126,3 +126,13 @@ body,html{
     justify-content: space-between;
     width: 86%;
 }
+
+.card-login .form {
+    min-height: 370px;
+}
+
+
+.card-login .login-header {
+    background-color: #131922 !important;
+    color: #9ED5FF !important;
+}
