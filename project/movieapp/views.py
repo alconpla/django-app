@@ -63,12 +63,16 @@ def movie_detail(request, title):
     poster = json_data['Poster']
     awards = json_data['Awards']
     try: 
-        rating = json_data['imdbRating']
-        # rating = ratings[1]['Value']
+        ratings = json_data['Ratings']
+        imdb = json_data['imdbRating']
+        metascore = json_data['Metascore']
+        rtomatoes = ratings[1]['Value']
     except:
-        rating = 'No rating'
+        imdb = 'N/A'
+        metascore = 'N/A'
+        rtomatoes = 'N/A'
 
-    context = {'title': title, 'rated': rated, 'released': released, 'runtime': runtime, 'genre': genre, 'director': director, 'actors': actors, 'plot': plot, 'poster': poster, 'rating': rating, 'awards': awards}
+    context = {'title': title, 'rated': rated, 'released': released, 'runtime': runtime, 'genre': genre, 'director': director, 'actors': actors, 'plot': plot, 'poster': poster, 'imdb': imdb, 'metascore': metascore, 'rtomatoes': rtomatoes, 'awards': awards}
     return render(request, 'moviedetail.html', context)
 
 # def custom_login(request):

@@ -1,3 +1,7 @@
+body,html{
+    margin-bottom: 0px;
+}
+
 .wallpaper{
     background-image: url(../img/ff1.jpg);
     background-position: top center;
@@ -34,6 +38,21 @@
     background-color: transparent;
     border-color: #fff;
     color: #fff;
+}
+
+.btn-search{
+    background-color: transparent !important;
+    border: 2px solid #9ED5FF !important;
+    color: #9ED5FF !important;
+    box-shadow: none !important;
+    font-weight: bold !important;
+    transition: 0.2s all;
+}
+
+.btn-search:hover{
+    background-color: transparent !important;
+    border-color: #fff !important;
+    color: #fff !important;
 }
 
 .navbar{
@@ -74,4 +93,36 @@
 .block{
     width: 32%;
     margin-right: 50px;
+}
+
+.page-footer{
+    height: 250px !important;
+    background-color: #131922 !important;
+    width: 100%;
+    color: #ACB4BF;
+    font-size: 3em;
+    padding-top: 80px;
+    text-transform: uppercase;
+}
+
+.page-footer h4{
+    font-weight: 700 !important;
+    margin-right: 50px;
+}
+
+.icons{
+    font-size: .8em;
+
+}
+
+.ratings.card{
+    margin-left: 0px;
+    color: #131922;
+}
+
+.ratings{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    width: 86%;
 }

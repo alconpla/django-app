@@ -6,17 +6,32 @@
                 <div class="">
                     <img src="{{ poster }}" alt="" class="img-responsive">
                 </div>
-                <h2>{{ title }}</h2>
-                <h4>Director: {{ director }}</h4>
-                <h5>Released: {{ released }}</h5>
-                <h5>Runtime: {{ runtime }} </h5>
-                <h5>Genre: {{ genre }}</h5>
-                <h5><i class="fa fa-imdb fa-2x"></i> {{ rating }}</h5>
+                <div class="ratings card container">
+                    <h5><i class="fa fa-imdb fa-2x"></i> {{ imdb }}</h5>
+                    <h5><i class="fa fa-star fa-2x"></i> {{ metascore }}</h5>
+                    <h5><i class="fa fa-certificate fa-2x"></i> {{ rtomatoes }}</h5>
+                </div>
             </div>
             <div class="col-md-8">
+                <h2 class="title mt-0 mb-2">{{ title }} <span class="badge badge-warning ">{{ rated }}</span></h2>
+                <h5 class="badge badge-dark mb-0 mt-0">{{ genre }}</h5>
                 <h3>{{ plot }}</h3>
-                <h4>Actors: {{ actors }}</h4>
-                <h4>Awards: {{ awards }}</h4>
+                <h4><b>Director:</b> {{ director }}</h4>
+                <h5><b>Released:</b> {{ released }}</h5>
+                <h5><b>Runtime:</b> {{ runtime }} </h5>
+                <h4><b>Actors:</b> {{ actors }}</h4>
+                <h4><b>Awards:</b> {{ awards }}</h4>
+                <div class="btn btn-primary btn-lg mt-4 text-center font-weight-bold"> 
+                    <i class="fa fa-plus"> </i>  Add to list
+                </div>
+            </div>
+        </div>
+        <hr></hr>
+        <div class="row">
+            <h2 class="pl-2 mr-4">Comments </h2> <a href="" class="btn btn-info btn-sm mt-4 mb-5"><i class="fa fa-comment"> </i>   Add comment</a>
+            <hr></hr>
+            <div class="col-md-12">
+
             </div>
         </div>
     </div>
