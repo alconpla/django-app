@@ -32,7 +32,7 @@
     </div>
 
     <div class="container mt-5">
-      <h2 class="mb-3">Marvel films</h2>
+      <h2 class="mb-3">Marvel movies</h2>
         <div class="row ">
             <div class="col-lg-12 d-flex justify-content-around flex-wrap">
                 {% for pelicula in peliculas %}
@@ -41,7 +41,7 @@
                     <div class="card-body">
                       <h5 class="card-title">{{ pelicula.title }}</h5>
                       <div class="d-flex justify-content-between">
-                        <h6 class="card-title"><i class="fa fa-eye"></i> {{ pelicula.year }}</h6>
+                        <h6 class="card-title"><i class="fa fa-calendar"></i> {{ pelicula.year }}</h6>
                         <a href="{% url 'movie_detail' title=pelicula.title %}" class="btn btn-sm btn-info "><i class="fa fa-eye"></i></a>
                       </div>
                     </div>
@@ -49,7 +49,7 @@
                 {% endfor %}
             </div>
         </div>
-        <h2 class="mb-3">Lord of the Rings films</h2>
+        <h2 class="mb-3">Lord of the Rings movies</h2>
         <div class="row ">
             <div class="col-lg-12 d-flex justify-content-around flex-wrap">
                 {% for pelicula in peliculas2 %}
@@ -66,7 +66,7 @@
                 {% endfor %}
             </div>
         </div>
-        <h2 class="mb-3">John Wick films</h2>
+        <h2 class="mb-3">John Wick movies</h2>
         <div class="row">
             <div class="col-lg-12 d-flex justify-content-around flex-wrap">
                 {% for pelicula in peliculas3 %}

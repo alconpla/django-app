@@ -21,9 +21,23 @@
                 <h5><b>Runtime:</b> {{ runtime }} </h5>
                 <h4><b>Actors:</b> {{ actors }}</h4>
                 <h4><b>Awards:</b> {{ awards }}</h4>
-                <div class="btn btn-primary btn-lg mt-4 text-center font-weight-bold"> 
-                    <i class="fa fa-plus"> </i>  Add to list
-                </div>
+                {% if user_not_logged %}
+                <a href="{% url 'login' %}" class="btn btn-danger btn-lg mt-4 text-center font-weight-bold"> 
+                    Login to add to your list
+                </a>
+                {% elif movie_already_added %}
+                <button class="btn btn-info btn-lg mt-4 text-center font-weight-bold"> 
+                    <i class="fa fa-check"> </i>  Added
+                </button>
+                {% else %}
+                <form action="#" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="movie"  value="{{ title }}" hidden>
+                    <button class="btn btn-primary btn-lg mt-4 text-center font-weight-bold"> 
+                        <i class="fa fa-plus"> </i>  Add to list
+                    </button>
+                </form>
+                {% endif %}
             </div>
         </div>
         <hr></hr>

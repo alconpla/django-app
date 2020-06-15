@@ -1,12 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 import requests
 import json
+from .models import Pelicula
 
-class Pelicula:
-    title = ''
-    year = 0
-    rated = ''
-    poster = ''
+# class Pelicula:
+#     title = ''
+#     year = 0
+#     rated = ''
+#     poster = ''
 
 
 # Create your views here.
@@ -50,76 +52,55 @@ def getMovies(title, search = False):
     return peliculas
 
 def movie_detail(request, title):
-    response = requests.get("http://www.omdbapi.com/?t=" + title + "&type=movie&apikey=77074898")
-    json_data = json.loads(response.text)
-    title = json_data['Title']
-    rated = json_data['Rated']
-    released = json_data['Released']
-    runtime = json_data['Runtime']
-    genre = json_data['Genre']
-    director = json_data['Director']
-    actors = json_data['Actors']
-    plot = json_data['Plot']
-    poster = json_data['Poster']
-    awards = json_data['Awards']
-    try: 
-        ratings = json_data['Ratings']
-        imdb = json_data['imdbRating']
-        metascore = json_data['Metascore']
-        rtomatoes = ratings[1]['Value']
-    except:
-        imdb = 'N/A'
-        metascore = 'N/A'
-        rtomatoes = 'N/A'
+    if request.method == 'POST':
+        return mylist(request)
+    else:
+        user_not_logged = True
+        movie_already_added = False
+        if request.user.is_authenticated:
+            user_not_logged = False
+            my_movie = Pelicula.objects.filter(title=title, user=request.user).first()
 
-    context = {'title': title, 'rated': rated, 'released': released, 'runtime': runtime, 'genre': genre, 'director': director, 'actors': actors, 'plot': plot, 'poster': poster, 'imdb': imdb, 'metascore': metascore, 'rtomatoes': rtomatoes, 'awards': awards}
-    return render(request, 'moviedetail.html', context)
+            if not my_movie == None:
+                movie_already_added = True
 
-# def custom_login(request):
-#     username = request.POST.get('username')
-#     password = request.POST.get('password')
-    
-#     user = authenticate(request, username=username, password=password)
+        response = requests.get("http://www.omdbapi.com/?t=" + title + "&type=movie&apikey=77074898")
+        json_data = json.loads(response.text)
+        title = json_data['Title']
+        rated = json_data['Rated']
+        released = json_data['Released']
+        runtime = json_data['Runtime']
+        genre = json_data['Genre']
+        director = json_data['Director']
+        actors = json_data['Actors']
+        plot = json_data['Plot']
+        poster = json_data['Poster']
+        awards = json_data['Awards']
+        try: 
+            ratings = json_data['Ratings']
+            imdb = json_data['imdbRating']
+            metascore = json_data['Metascore']
+            rtomatoes = ratings[1]['Value']
+        except:
+            imdb = 'N/A'
+            metascore = 'N/A'
+            rtomatoes = 'N/A'
 
-#     if user is not None:
-#         login(request, user)
-        
-#     return HttpResponseRedirect(reverse('home:home'))
+        context = {'title': title, 'rated': rated, 'released': released, 'runtime': runtime, 'genre': genre, 'director': director, 'actors': actors, 'plot': plot, 'poster': poster, 'imdb': imdb, 'metascore': metascore, 'rtomatoes': rtomatoes, 'awards': awards, 'user_not_logged': user_not_logged, 'movie_already_added': movie_already_added }
+        return render(request, 'moviedetail.html', context)
 
-# def custom_logout(request):
-#     if request.user.is_authenticated:
-#         logout(request)
+def mylist(request):
+    if request.user.is_authenticated:
+        movie_title = request.POST.get('movie')
+        if movie_title != None:
+            response = requests.get("http://www.omdbapi.com/?t=" + movie_title + "&type=movie&apikey=77074898")
+            pelicula = Pelicula()
+            json_data = json.loads(response.text)
+            pelicula.title = json_data['Title']
+            pelicula.poster = json_data['Poster']
+            pelicula.rated = json_data['Rated']
+            pelicula.year = json_data['Year']
+            pelicula.user = request.user
+            pelicula.save()
 
-#     return HttpResponseRedirect(reverse('home:home'))
-
-# def custom_signup(request):
-#     if not request.user.is_authenticated:
-#         if request.method == 'POST':
-#             form = SignupForm(request.POST)
-            
-#             if form.is_valid():
-#                 new_user = form.save()
-#                 display_name = form.cleaned_data.get('display_name')
-#                 bio = form.cleaned_data.get('bio')
-                
-#                 new_user.profile = Profile()
-#                 new_user.profile.display_name = display_name
-#                 new_user.profile.bio = bio
-#                 new_user.profile.save()
-
-#                 username = form.cleaned_data.get('username')
-#                 raw_password = form.cleaned_data.get('password1')
-#                 user = authenticate(username=username, password=raw_password)
-                
-#                 login(request, user)
-#                 return HttpResponseRedirect(reverse("home:home"))
-#         else:
-#             form = SignupForm()
-        
-#         replacements = {
-#             'form': form
-#         }
-
-#         return render(request, 'users/create-account.html', replacements)
-#     else:
-#         return HttpResponseRedirect(reverse('home:home'))
+    return HttpResponseRedirect(request.path_info)
