@@ -104,3 +104,16 @@ def mylist(request):
             pelicula.save()
 
     return HttpResponseRedirect(request.path_info)
+
+def showlist(request):
+    if request.user.is_authenticated:
+        my_movies = Pelicula.objects.all().filter(user=request.user)
+        count = len(my_movies)
+
+        context = {'my_movies': my_movies, 'count':count}
+        return render(request, 'showlist.html', context)
+
+def delete_from_list(request, title):
+    if request.user.is_authenticated:
+        delete = Pelicula.objects.get(title=title, user=request.user).delete()
+        return redirect('showlist')

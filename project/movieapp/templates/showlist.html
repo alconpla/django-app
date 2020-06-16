@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="title">My movie list <b>({{ count }})</b> </h2>
+            <hr>
+            <div class="row" style="min-height: 53.4vh;">
+                <div class="col-lg-12 d-flex justify-content-around flex-wrap">
+                    {% for movie in my_movies %}
+                    <div class="my_list_card mr-5 mb-5" style="width: 18rem; background-image: url({{movie.poster}});">
+                        <a href="{% url 'delete_from_list' title=movie.title %}" class="btn btn-sm btn-danger "><i class="fa fa-times"></i></a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

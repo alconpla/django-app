@@ -95,6 +95,7 @@ body,html{
     margin-right: 50px;
 }
 
+
 .page-footer{
     height: 250px !important;
     background-color: #131922 !important;
@@ -103,6 +104,8 @@ body,html{
     font-size: 3em;
     padding-top: 80px;
     text-transform: uppercase;
+    /* position: absolute;
+    bottom: 0; */
 }
 
 .page-footer h4{
@@ -123,8 +126,10 @@ body,html{
 .ratings{
     display: flex;
     flex-flow: row;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 86%;
+    padding-top: 5px;
+    padding-bottom: 0px;
 }
 
 .card-login .form {
@@ -135,4 +140,46 @@ body,html{
 .card-login .login-header {
     background-color: #131922 !important;
     color: #9ED5FF !important;
+}
+
+.ratings .fa{
+    color: #131922 !important;
+}
+
+.ratings h5{
+    line-height: 2em;
+    margin-left: 0px;
+    font-weight: bold;
+}
+
+.ratings .card{
+    padding-top: 15px !important;
+    border-radius: 0 5px 0px 5px !important;
+}
+
+.my_list_card {
+    width: 100%;
+    border-radius: 5px;
+    height: 420px !important;
+    background-size: cover;
+    background-position: top center;
+    transition: 0.2s all;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    
+}
+
+.my_list_card:hover{
+    filter: grayscale(50%);
+}
+
+.my_list_card:hover a{
+    filter: grayscale(0%) !important;
+} 
+
+.my_list_card a{
+    align-self: baseline;
+    margin-top: auto;
+    margin-bottom: 15px;
 }
