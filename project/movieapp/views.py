@@ -4,6 +4,8 @@ import requests
 import json
 from .models import Pelicula
 from .models import Comentario
+from django.contrib.auth.models import User
+
 
 # class Pelicula:
 #     title = ''
@@ -138,3 +140,14 @@ def add_comment(request):
 def show_comments(title):
     comments = Comentario.objects.all().filter(movie=title)
     return comments
+
+def custom_signup(request):
+    if request.method == 'GET':
+        return render(request, 'registration/register.html')
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        mail = request.POST.get('mail')
+        password = request.POST.get('password')
+        user = User.objects.create_user(username, mail, password)
+        return redirect('login')

@@ -23,6 +23,14 @@
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
+                    <i class="material-icons">mail</i>
+                  </span>
+                </div>
+                <input type="email" name="mail" class="form-control" placeholder="Email...">
+              </div>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
                     <i class="material-icons">lock_outline</i>
                   </span>
                 </div>
@@ -32,7 +40,7 @@
             <div class="footer text-center">
               <button type="submit" class="btn btn-primary mt-4 btn-lg"><i class="fa fa-sign-in"></i> Sign up now</button>
             </div>
-            <a href="" class="btn btn-dark btn-link ml-4 mt-2 text-center"> Already have an account? Login here.</a>
+            <a href="{% url 'login' %}" class="btn btn-dark btn-link ml-4 mt-2 text-center"> Already have an account? Login here.</a>
           </form>
         </div>
       </div>
