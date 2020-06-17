@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 import requests
 import json
 from .models import Pelicula
+from .models import Comentario
 
 # class Pelicula:
 #     title = ''
@@ -53,7 +54,10 @@ def getMovies(title, search = False):
 
 def movie_detail(request, title):
     if request.method == 'POST':
-        return mylist(request)
+        if request.POST.get('content') != None:
+            return add_comment(request)
+        else:
+            return mylist(request)
     else:
         user_not_logged = True
         movie_already_added = False
@@ -86,7 +90,9 @@ def movie_detail(request, title):
             metascore = 'N/A'
             rtomatoes = 'N/A'
 
-        context = {'title': title, 'rated': rated, 'released': released, 'runtime': runtime, 'genre': genre, 'director': director, 'actors': actors, 'plot': plot, 'poster': poster, 'imdb': imdb, 'metascore': metascore, 'rtomatoes': rtomatoes, 'awards': awards, 'user_not_logged': user_not_logged, 'movie_already_added': movie_already_added }
+        comments = show_comments(title)
+
+        context = {'title': title, 'rated': rated, 'released': released, 'runtime': runtime, 'genre': genre, 'director': director, 'actors': actors, 'plot': plot, 'poster': poster, 'imdb': imdb, 'metascore': metascore, 'rtomatoes': rtomatoes, 'awards': awards, 'user_not_logged': user_not_logged, 'movie_already_added': movie_already_added, 'comments': comments }
         return render(request, 'moviedetail.html', context)
 
 def mylist(request):
@@ -117,3 +123,18 @@ def delete_from_list(request, title):
     if request.user.is_authenticated:
         delete = Pelicula.objects.get(title=title, user=request.user).delete()
         return redirect('showlist')
+
+def add_comment(request):
+    comment = request.POST.get('content')
+    if comment != None:
+        comentario = Comentario()
+        comentario.content = comment
+        comentario.movie = request.POST.get('movie')
+        comentario.user = request.user
+        comentario.save()
+
+    return HttpResponseRedirect(request.path_info)
+
+def show_comments(title):
+    comments = Comentario.objects.all().filter(movie=title)
+    return comments

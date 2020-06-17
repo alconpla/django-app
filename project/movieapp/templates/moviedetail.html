@@ -42,11 +42,34 @@
         </div>
         <hr></hr>
         <div class="row">
-            <h2 class="pl-2 mr-4">Comments </h2> <a href="" class="btn btn-info btn-sm mt-4 mb-5"><i class="fa fa-comment"> </i>   Add comment</a>
-            <hr></hr>
-            <div class="col-md-12">
-
+            <div class="col-md-6">
+                <form action="#" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="content">Add your opinion of the movie</label>
+                        <input type="text" name="movie"  value="{{ title }}" hidden>
+                        <textarea class="form-control" id="content" name="content" rows="4"></textarea>
+                        <button class="btn btn-info btn-sm mt-4 mb-5"> <i class="fa fa-comment"></i> Add comment</button>
+                    </div>
+                </form>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="mt-0 mb-1">Comments</h2>
+            </div>
+        </div>
+        <div class="row">
+            {% for comment in comments %}
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ comment.user }}</h4>
+                        <h4 class="card-text">{{ comment.content }}</h4>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
